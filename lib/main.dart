@@ -8,6 +8,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Movie App',
+
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.red,
+      ),
       theme: ThemeData(
         primarySwatch: Colors.red, // Netflix-like theme
       ),

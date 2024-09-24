@@ -45,31 +45,34 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: movies.isEmpty
           ? Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Section for popular movies (mock section)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Popular Movies",
-                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  buildMovieList(), // Horizontal scrolling movie list
-                  // You can add more sections like "Trending", "Top Rated", etc.
-                ],
-              ),
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Section for popular movies (mock section)
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Text(
+                //     "Popular Movies",
+                //     style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                Expanded(child: buildMovieList()), // Use Expanded to fill available space
+                // You can add more sections like "Trending", "Top Rated", etc.
+              ],
             ),
     );
   }
 
   Widget buildMovieList() {
     return Container(
-      height: 250, // Height of each movie thumbnail
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
+      height: 500, // Adjust the height to accommodate more movies
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns in the grid
+          childAspectRatio: 0.7, // Adjust the aspect ratio for better layout
+          crossAxisSpacing: 8.0, // Horizontal space between grid items
+          mainAxisSpacing: 8.0, // Vertical space between grid items
+        ),
         itemCount: movies.length,
         itemBuilder: (context, index) {
           var movie = movies[index]['show'];
@@ -80,8 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ));
             },
             child: Container(
-              width: 150, // Width of each movie thumbnail container
-              margin: EdgeInsets.symmetric(horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Colors.grey[800], // Background color for better visibility
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -91,27 +96,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image.network(
                         movie['image'] != null ? movie['image']['medium'] : 'https://via.placeholder.com/150',
                         fit: BoxFit.cover,
-                        width: 150,
-                        height: 200, // Set a fixed height for the movie poster
+                        width: double.infinity, // Set width to fill the container
                       ),
                     ),
                   ),
                   SizedBox(height: 8),
-                  Text(
-                    movie['name'],
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      movie['name'],
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.yellow, size: 14),
-                      SizedBox(width: 4),
-                      Text(
-                        movie['rating']['average'] != null ? movie['rating']['average'].toString() : 'N/A',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.yellow, size: 14),
+                        SizedBox(width: 4),
+                        Text(
+                          movie['rating']['average'] != null ? movie['rating']['average'].toString() : 'N/A',
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
