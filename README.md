@@ -2,7 +2,6 @@
 
 # TvMaje
 
-![Screenshots](https://github.com/jnvshubham7/TvMaje/raw/main/screenshot/flutter_01.png)
 
 ## Screenshots
 <p float="left">
