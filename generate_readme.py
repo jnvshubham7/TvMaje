@@ -5,10 +5,10 @@
 import os
 
 # Your GitHub repository URL
-repo_url = 'https://github.com/jnvshubham7/TvMaje/raw/main/Screenshot/'
+repo_url = 'https://github.com/jnvshubham7/TvMaje/tree/main/Screenshots'
 
 # Path to the Screenshot folder
-screenshot_folder = 'Screenshot'
+screenshot_folder = 'Screenshots'
 readme_path = 'README.md'
 
 # Check if the folder exists
