@@ -1,7 +1,7 @@
 import os
 
 # Your GitHub repository URL
-repo_url = 'https://github.com/jnvshubham7/TvMaje/tree/main/screenshot'
+repo_url = 'https://github.com/jnvshubham7/TvMaje/raw/main/screenshot/'
 
 # Path to the Screenshot folder
 screenshot_folder = 'screenshot'
