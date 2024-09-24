@@ -9,6 +9,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  PageController _pageController = PageController();
 
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
@@ -18,15 +19,32 @@ class _MainScreenState extends State<MainScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
     });
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-   
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        children: _widgetOptions,
+        physics: BouncingScrollPhysics(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -38,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.black,
         onTap: _onItemTapped,
       ),
-      backgroundColor: Colors.black, // Dark Netflix-like background
+      backgroundColor: Colors.black,
     );
   }
 }
