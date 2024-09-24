@@ -29,32 +29,41 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[900],
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: TextField(
-            controller: _searchController,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              hintText: 'Search for movies, shows, etc...',
-              hintStyle: TextStyle(color: Colors.grey[600]),
-              border: InputBorder.none,
-              prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              color: Colors.grey[900],
+              borderRadius: BorderRadius.circular(30),
             ),
-            onChanged: (query) {
-              if (query.isNotEmpty) {
-                searchMovies(query); // Automatically search as user types
-              } else {
-                setState(() {
-                  searchResults =
-                      []; // Clear search results if the query is empty
-                });
-              }
-            },
-          ),
-        ),
+            child: TextField(
+              controller: _searchController,
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: 'Search for movies, shows, etc...',
+                hintStyle: TextStyle(color: Colors.grey[600]),
+                border: InputBorder.none,
+                prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.clear, color: Colors.grey[600]),
+                        onPressed: () {
+                          setState(() {
+                            _searchController.clear();
+                            searchResults = [];
+                          });
+                        },
+                      )
+                    : null,
+                contentPadding: EdgeInsets.symmetric(vertical: 15),
+              ),
+              onChanged: (query) {
+                if (query.isNotEmpty) {
+                  searchMovies(query);
+                } else {
+                  setState(() {
+                    searchResults = [];
+                  });
+                }
+              },
+            )),
       ),
       body: ListView.builder(
         itemCount: searchResults.length,
@@ -87,14 +96,19 @@ class _SearchScreenState extends State<SearchScreen> {
                 subtitle: Text(
                   movie['summary'] != null
                       ? movie['summary']
-                              .replaceAll(
-                                  RegExp(r'<[^>]*>'), '') // Remove HTML tags
+                              .replaceAll(RegExp(r'<[^>]*>'), '')
                               .substring(
                                   0,
-                                  movie['summary'].length < 60
-                                      ? movie['summary'].length
+                                  movie['summary']!
+                                              .replaceAll(
+                                                  RegExp(r'<[^>]*>'), '')
+                                              .length <
+                                          60
+                                      ? movie['summary']!
+                                          .replaceAll(RegExp(r'<[^>]*>'), '')
+                                          .length
                                       : 60) +
-                          '...' // Dynamically truncate
+                          '...'
                       : 'No summary available',
                   style: TextStyle(color: Colors.grey),
                 ),

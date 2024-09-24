@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';  // Import the url_launcher package
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsScreen extends StatelessWidget {
   final Map movie;
 
   DetailsScreen({required this.movie});
 
-  // Function to launch the official website
   Future<void> _launchUrl(String url) async {
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -34,7 +33,6 @@ class DetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Movie Poster with Hero animation
             Hero(
               tag: movie['id'],
               child: movie['image'] != null
@@ -56,7 +54,6 @@ class DetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Movie Title
                   Text(
                     movie['name'],
                     style: TextStyle(
@@ -66,8 +63,6 @@ class DetailsScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-
-                  // Genres
                   Text(
                     movie['genres'].isNotEmpty
                         ? movie['genres'].join(', ')
@@ -75,8 +70,6 @@ class DetailsScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white70, fontSize: 16),
                   ),
                   SizedBox(height: 16),
-
-                  // Movie Summary
                   Text(
                     movie['summary'] != null
                         ? movie['summary'].replaceAll(RegExp(r'<[^>]*>'), '')
@@ -84,8 +77,6 @@ class DetailsScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   SizedBox(height: 16),
-
-                  // Movie Details (Runtime, Rating, Status, etc.)
                   Row(
                     children: [
                       Icon(Icons.timer, color: Colors.white70),
@@ -134,18 +125,18 @@ class DetailsScreen extends StatelessWidget {
                     'Status: ${movie['status']}',
                     style: TextStyle(color: Colors.white70, fontSize: 16),
                   ),
-
                   SizedBox(height: 20),
-                  // Official Website Button
                   movie['officialSite'] != null
-                      ? ElevatedButton.icon(
-                          onPressed: () {
-                            _launchUrl(movie['officialSite']);  // Launch official site
-                          },
-                          icon: Icon(Icons.link),
-                          label: Text('Official Website'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.redAccent,
+                      ? Center(
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              _launchUrl(movie['officialSite']);
+                            },
+                            icon: Icon(Icons.link),
+                            label: Text('Official Website'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
                           ),
                         )
                       : SizedBox(),

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       theme: ThemeData(
-        primarySwatch: Colors.red, // Netflix-like theme
+        primarySwatch: Colors.red, 
       ),
       home: SplashScreen(),
     );

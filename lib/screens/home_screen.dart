@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/screens/search_screen.dart';
 import 'dart:convert';
-import 'details_screen.dart'; // Import your details screen here
+import 'details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -48,16 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Section for popular movies (mock section)
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Text(
-                //     "Popular Movies",
-                //     style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                //   ),
-                // ),
-                Expanded(child: buildMovieList()), // Use Expanded to fill available space
-                // You can add more sections like "Trending", "Top Rated", etc.
+                Expanded(child: buildMovieList()),
               ],
             ),
     );
@@ -65,13 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget buildMovieList() {
     return Container(
-      height: 500, // Adjust the height to accommodate more movies
+      height: 500,
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Number of columns in the grid
-          childAspectRatio: 0.7, // Adjust the aspect ratio for better layout
-          crossAxisSpacing: 8.0, // Horizontal space between grid items
-          mainAxisSpacing: 8.0, // Vertical space between grid items
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
         ),
         itemCount: movies.length,
         itemBuilder: (context, index) {
@@ -85,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: Colors.grey[800], // Background color for better visibility
+                color: Colors.grey[800],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image.network(
                         movie['image'] != null ? movie['image']['medium'] : 'https://via.placeholder.com/150',
                         fit: BoxFit.cover,
-                        width: double.infinity, // Set width to fill the container
+                        width: double.infinity,
                       ),
                     ),
                   ),
