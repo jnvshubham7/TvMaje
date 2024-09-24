@@ -26,11 +26,12 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.grey[900],
         title: Container(
             decoration: BoxDecoration(
-              color: Colors.grey[900],
+              color: Colors.black,
               borderRadius: BorderRadius.circular(30),
             ),
             child: TextField(

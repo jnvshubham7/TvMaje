@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:movie_app/screens/home_screen.dart';
 import 'package:movie_app/screens/search_screen.dart';
@@ -25,6 +24,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
+   
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -32,8 +33,12 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.black,
         onTap: _onItemTapped,
       ),
+      backgroundColor: Colors.black, // Dark Netflix-like background
     );
   }
 }
