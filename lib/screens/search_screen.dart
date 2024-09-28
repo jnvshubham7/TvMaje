@@ -113,6 +113,29 @@ class _SearchScreenState extends State<SearchScreen> {
                       : 'No summary available',
                   style: TextStyle(color: Colors.grey),
                 ),
+
+//                 The provided Dart code snippet is part of a Flutter widget, 
+//specifically a Text widget used as a subtitle within a larger UI component. 
+//This widget displays a summary of a movie, with some additional formatting 
+//and constraints applied to the text.=
+// The Text widget's content is determined by checking if the movie['summary']
+// field is not null. If the summary exists, it undergoes a series of transformations. 
+//First, any HTML tags within the summary are removed using the replaceAll method 
+//with a regular expression (RegExp(r'<[^>]*>')). This ensures that only plain text 
+//is displayed, stripping out any HTML formatting.
+
+// Next, the code checks the length of the cleaned summary text. If the length is 
+//less than 60 characters, the entire summary is used. Otherwise, only the first 60 
+//characters are taken. This is achieved using the substring method, which extracts a
+// portion of the string from the start up to the specified length. The extracted text
+// is then concatenated with an ellipsis ('...') to indicate that the summary has been truncated.
+
+// If the movie['summary'] field is null, the text "No summary available" is displayed 
+//instead. This provides a fallback message for cases where the summary data is missing.
+
+// Finally, the Text widget is styled with a TextStyle that sets the text color to grey 
+//(Colors.grey). This styling ensures that the subtitle text visually aligns with the 
+//design specifications of the application.
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (_) => DetailsScreen(movie: movie),

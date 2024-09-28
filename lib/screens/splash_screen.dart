@@ -8,9 +8,18 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  // why with SingleTickerProviderStateMixin?
+  // The SingleTickerProviderStateMixin is used to provide a TickerProvider
+  //for the AnimationController.
+
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
+
+  // why late keyword is used here?
+  // The late keyword is used to tell the Dart compiler
+  //that the variable will be initialized later.
 
   @override
   void initState() {
@@ -62,6 +71,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     image: DecorationImage(
                       image: AssetImage('assets/splash_image.png'),
                       fit: BoxFit.cover,
+                      // why BoxFit.cover?
+                      // The BoxFit.cover is used to scale the image
+                      // uniformly (maintaining the image's aspect ratio)
+                      // so that both dimensions (width and height) of the image
+                      // will be equal to or larger than the corresponding dimension of the box.
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
